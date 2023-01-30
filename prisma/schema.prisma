@@ -19,7 +19,7 @@ model images {
 }
 
 model products {
-  id          Int    @id @default(autoincrement())
+  id          Int  @id @default(autoincrement())
   title       String
   description String
   price       Int
