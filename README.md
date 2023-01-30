@@ -1,15 +1,24 @@
-# POC-TypeScript
+# POC-Prisma
 
-Meu primeiro projeto em TS é uma lista de tarefas domésticas, que permite criar uma nova tarefa, marcá-la como concluída, deletá-la e retornar uma lista com todas as tarefas e o número de tarefas pendentes ;) 
+Este projeto usa Prisma e fornece a vitrine de um e-commerce de jóias, permitindo ao administrador cadastrar produtos. 
 
-Somente back-end. Desenvolvido em camadas e com deploy de banco.
+Somente back-end. Desenvolvido em camadas.
 
 ### Rotas
 
-* POST("/tasks") - adiciona uma nova tarefa a partir de um body no formato {"responsable": "Dayane", "description": "Aspirar a casa"};
-* GET("/tasks") - retorna todas as tarefas e uma mensagem com o número de tarefas pendentes;
-* PATCH("/tasks/:id") - necessita do id da tarefa para atualizar seu status (de "concluded": "false" para "true");
-* DELETE("/tasks/:id") - necessita do id da tarefa para excluí-la.
+* POST("/product") - cadastra um novo produto a partir de um body no formato:
+  {
+    title:"Anel Sky",
+    description: "Anel de Prata com uma pedra Topázio Sky e duas Topázios Incolores - Vivara",
+    price: 36000,
+    categoryId: 1
+  };
+* POST("/photo") - adiciona imagens ao produto cadastrado a partir de um body no formato:
+  {
+    productId: 1,
+    url: "https://assets.vtex.app/unsafe.jpg"
+  };
+* GET("/") - retorna todos os produtos cadastrados.
 
 ### How to run
 
