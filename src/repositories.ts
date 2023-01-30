@@ -1,39 +1,36 @@
+import { Products, images } from "@prisma/client";
 import prisma from "./database.js";
-import { ProductType } from "./protocols.js";
 
-export async function createProduct(title: string, description: string, price: number, categoryId: number): Promise<void> {
+export async function createProduct(title: string, description: string, price: number, categoryId: number, imageId: number): Promise<void> {
     await prisma.products.create({
         data: {
             title,
             description,
             price,
-            categoryId
+            categoryId,
+            imageId
         }
     });
 };
 
-export async function createImage(productId: number, url: string): Promise<void> {  
+export async function createImage(url: string): Promise<void> {  
     await prisma.images.create({
         data: {
-            productId,
             url
         }
     });
 };
 
-export async function findProducts(): Promise<ProductType[]> {
-    const products = await prisma.products.findMany({})
+export async function findProducts(): Promise<Products[]> {
+    const products = await prisma.products.findMany({
+        include: {category: true, image: true}     
+    })
+
     return products
 };
 
 export async function deleteProductRepository(id: number): Promise<void> {
-    const deleteProduct = prisma.products.delete({
+    await prisma.products.delete({
         where: {id}
     });
-
-    const deleteImages = prisma.images.deleteMany({
-        where: {productId: id}
-    });
-          
-    const transaction = await prisma.$transaction([deleteProduct, deleteImages])
 };

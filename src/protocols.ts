@@ -4,10 +4,10 @@ export type ProductType = {
     description: string,
     price: number,
     categoryId: number
+    imageId: number
 };
 
 export type PhotoType = {
     id?:number,
-    productId: number,
     url: string
 };

@@ -1,14 +1,13 @@
 import { Request, Response } from "express";
-import { number } from "joi";
 import { ProductType, PhotoType } from "./protocols.js";
 import { getProductsList, insertImage, insertProduct, deleteProductService } from "./services.js";
 
 
 export async function newProduct(req: Request, res: Response) {
-    const {title, description, price, categoryId} = res.locals.product as ProductType;
+    const {title, description, price, categoryId, imageId} = res.locals.product as ProductType;
 
     try {
-        await insertProduct(title, description, price, categoryId);
+        await insertProduct(title, description, price, categoryId, imageId);
         res.sendStatus(201);
     } catch(err) {
         res.status(500).send(err);
@@ -16,10 +15,10 @@ export async function newProduct(req: Request, res: Response) {
 };
 
 export async function newPhoto(req: Request, res: Response) {
-    const { productId, url } = res.locals.photo as PhotoType;
+    const { url } = res.locals.photo as PhotoType;
 
     try {
-        await insertImage(productId, url);
+        await insertImage(url);
         res.sendStatus(201); 
     } catch(err) {
         res.status(500).send(err);
@@ -37,10 +36,10 @@ export async function getProducts(req: Request, res: Response) {
 };
 
 export async function deleteProduct(req: Request, res: Response) {
-    const {id} = req.params;
+    const id = parseInt(req.params.id);
 
     try {
-        await deleteProductService({id});
+        await deleteProductService(id);
         res.sendStatus(200);
     } catch(err) {
         res.status(500).send(err);

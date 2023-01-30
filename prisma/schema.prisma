@@ -8,20 +8,24 @@ datasource db {
 }
 
 model categories {
-  id       Int    @id @default(autoincrement())
-  category String @unique
+  id       Int        @id @default(autoincrement())
+  category String     @unique
+  Products Products[]
 }
 
 model images {
-  id        Int    @id @default(autoincrement())
-  productId Int
-  url       String
+  id       Int        @id @default(autoincrement())
+  url      String     @unique
+  Products Products[]
 }
 
-model products {
-  id          Int  @id @default(autoincrement())
+model Products {
+  id          Int        @id @default(autoincrement())
   title       String
   description String
   price       Int
+  imageId     Int
+  image       images     @relation(fields: [imageId], references: [id])
   categoryId  Int
+  category    categories @relation(fields: [categoryId], references: [id])
 }
