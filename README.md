@@ -1,6 +1,6 @@
 # POC-Prisma
 
-Este projeto usa Prisma e fornece a vitrine de um e-commerce de jóias, permitindo ao administrador cadastrar produtos. 
+Este projeto usa Prisma e fornece a vitrine de um e-commerce de jóias, permitindo ao administrador cadastrar e deletar produtos. 
 
 Somente back-end. Desenvolvido em camadas.
 
@@ -18,6 +18,7 @@ Somente back-end. Desenvolvido em camadas.
     productId: 1,
     url: "https://assets.vtex.app/unsafe.jpg"
   };
+* DELETE("/product/:id") - apaga o produto e suas fotos a partir do id do produto recebido como parâmetro;
 * GET("/") - retorna todos os produtos cadastrados.
 
 ### How to run
