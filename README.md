@@ -1,6 +1,6 @@
 # POC-Prisma
 
-Este projeto usa Prisma e fornece a vitrine de um e-commerce de jóias, permitindo ao administrador cadastrar e deletar produtos. 
+Este projeto usa Prisma e fornece a vitrine de um e-commerce de jóias, permitindo ao administrador cadastrar, atualizar e deletar produtos, além de obter uma lista com todos os produtos cadastrados. 
 
 Somente back-end. Desenvolvido em camadas.
 
@@ -11,15 +11,24 @@ Somente back-end. Desenvolvido em camadas.
     title:"Anel Sky",
     description: "Anel de Prata com uma pedra Topázio Sky e duas Topázios Incolores - Vivara",
     price: 36000,
-    categoryId: 1
+    categoryId: 1,
+    imageId: 1
   };
-* POST("/photo") - adiciona imagens ao produto cadastrado a partir de um body no formato:
+* POST("/photo") - adiciona imagens para os produtos a partir de um body no formato:
   {
-    productId: 1,
     url: "https://assets.vtex.app/unsafe.jpg"
   };
-* DELETE("/product/:id") - apaga o produto e suas fotos a partir do id do produto recebido como parâmetro;
-* GET("/") - retorna todos os produtos cadastrados.
+* GET("/") - retorna todos os produtos cadastrados;
+* DELETE("/product/:id") - apaga o produto a partir de seu id recebido como parâmetro;
+* PUT("/product/update") - atuliza os dados do produto a partir de um body no formato:
+  {
+    id: 1,
+    title:"Anel Sky",
+    description: "Anel de Prata com uma pedra Topázio Sky e duas Topázios Incolores - Vivara",
+    price: 30000, 
+    categoryId: 1,
+    imageId: 1
+  };.
 
 ### How to run
 

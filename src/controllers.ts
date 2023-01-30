@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ProductType, PhotoType } from "./protocols.js";
-import { getProductsList, insertImage, insertProduct, deleteProductService } from "./services.js";
+import { getProductsList, insertImage, insertProduct, deleteProductService, updateProductService } from "./services.js";
 
 
 export async function newProduct(req: Request, res: Response) {
@@ -44,4 +44,15 @@ export async function deleteProduct(req: Request, res: Response) {
     } catch(err) {
         res.status(500).send(err);
     };
-}
+};
+
+export async function updateProduct(req: Request, res: Response) {
+    const product = res.locals.product;
+
+    try {
+        await updateProductService(product);
+        res.sendStatus(200);
+    } catch(err) {
+        res.status(500).send(err);
+    };
+};

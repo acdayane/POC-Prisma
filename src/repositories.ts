@@ -1,4 +1,4 @@
-import { Products, images } from "@prisma/client";
+import { Products } from "@prisma/client";
 import prisma from "./database.js";
 
 export async function createProduct(title: string, description: string, price: number, categoryId: number, imageId: number): Promise<void> {
@@ -26,11 +26,26 @@ export async function findProducts(): Promise<Products[]> {
         include: {category: true, image: true}     
     })
 
-    return products
+    return products;
 };
 
 export async function deleteProductRepository(id: number): Promise<void> {
     await prisma.products.delete({
         where: {id}
+    });
+};
+
+export async function updateProductRepository(product: Products): Promise<void> {
+    const {id, title, description, price, categoryId, imageId} = product;
+
+    await prisma.products.update({
+        where: {id},
+        data: {
+            title,
+            description,
+            price,
+            categoryId,
+            imageId
+        }
     });
 };
